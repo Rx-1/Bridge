@@ -12,6 +12,8 @@ public class PlayerAvatarMover : MonoBehaviour {
     public float acceleration = 20;
     public float topSpeed = 10;
 
+    Animator AC;
+
     float leftR;
     float rightR;
 
@@ -49,6 +51,9 @@ public class PlayerAvatarMover : MonoBehaviour {
         } else {
             Debug.LogError("Undefined right restrain.");
         }
+        AC = gameObject.GetComponent<Animator>();
+        if (!AC)
+            Debug.LogError("No animator found.");
 	}
 	
 	// Update is called once per frame
@@ -72,8 +77,19 @@ public class PlayerAvatarMover : MonoBehaviour {
         transform.position += transform.right * speed * Time.deltaTime;
         if(transform.localPosition.x < leftR) {
             transform.localPosition += Vector3.right * (leftR - transform.localPosition.x);
+            speed = 0;
         } else if(transform.localPosition.x > rightR) {
             transform.localPosition += Vector3.right * (rightR - transform.localPosition.x);
+            speed = 0;
+        }
+        if (speed < 0) {
+            AC.Play("WalkLeft");
+        } else if (speed > 0) {
+            AC.Play("WalkRight");
+        } else if (button) {
+            AC.Play("Interact");
+        } else {
+            AC.Play("Idle");
         }
 	}
 }
