@@ -3,6 +3,8 @@ using System.Collections;
 
 public class PlayerAvatarMover : MonoBehaviour {
 
+    public static PlayerAvatarMover player;
+
     public string ourAxis = "Horizontal";
     public float minimumInput;
 
@@ -21,6 +23,13 @@ public class PlayerAvatarMover : MonoBehaviour {
 
     GameObject button;
 
+    public bool IsStill() {
+        if(speed == 0) {
+            return true;
+        }
+        return false;
+    }
+
     void OnTriggerEnter(Collider c) {
         if (button)
             Debug.LogError("Entered button while alraedy having button.");
@@ -33,6 +42,12 @@ public class PlayerAvatarMover : MonoBehaviour {
         } else {
             button = null;
         }
+    }
+
+    void Awake() {
+        if (player)
+            Debug.LogError("Only one player allowed");
+        player = this;
     }
 
     // Use this for initialization
