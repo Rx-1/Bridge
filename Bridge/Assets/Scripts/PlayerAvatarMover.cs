@@ -62,19 +62,27 @@ public class PlayerAvatarMover : MonoBehaviour {
             float inputStrengthXx = Mathf.Clamp(Input.GetAxisRaw(ourAxis), -1f, 1f);
             speed += inputStrengthXx * acceleration * Time.deltaTime;
             speed = Mathf.Clamp(speed, -topSpeed, topSpeed);
-        } /*else if (button) {
+        } else if (button) {
             float directionXx = button.transform.localPosition.x - transform.localPosition.x;
             if (directionXx != 0) {
                 speed += (directionXx / Mathf.Abs(directionXx)) * acceleration * Time.deltaTime;
+                speed = Mathf.Clamp(speed, -topSpeed, topSpeed);
+                if (directionXx > 0 != button.transform.localPosition.x - (transform.localPosition + Vector3.right * speed * Time.deltaTime).x > 0) {
+                    transform.localPosition += Vector3.right * directionXx;
+                    speed = 0;
+                }
+            } else {
+                speed = 0;
             }
-        }*/ else if (speed != 0) {
+        } else if (speed != 0) {
             if (Mathf.Abs(speed) < Mathf.Abs(acceleration * Time.deltaTime)) {
                 speed = 0;
             } else {
                 speed -= (speed / Mathf.Abs(speed)) * acceleration * Time.deltaTime;
+                speed = Mathf.Clamp(speed, -topSpeed, topSpeed);
             }
         }
-        transform.position += transform.right * speed * Time.deltaTime;
+        transform.localPosition += Vector3.right * speed * Time.deltaTime;
         if(transform.localPosition.x < leftR) {
             transform.localPosition += Vector3.right * (leftR - transform.localPosition.x);
             speed = 0;
