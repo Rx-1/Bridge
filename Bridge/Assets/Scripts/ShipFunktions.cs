@@ -20,6 +20,12 @@ public class ShipFunktions : MonoBehaviour {
 
     Cannon cannon;
 
+    void OnCollisionEnter() {
+        Destroy(RB);
+        transform.rotation = Quaternion.Euler(-30, transform.eulerAngles.y, 25);
+        this.enabled = false;
+    }
+
     void Awake() {
         if (player)
             Debug.LogError("Only one ship allowed");

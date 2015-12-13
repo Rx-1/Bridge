@@ -27,6 +27,9 @@ public class Cannon : MonoBehaviour {
         if (cannon)
             Debug.LogError("Only one cannon allowed");
         cannon = this;
+        Destroy(transform.GetChild(0).gameObject);
+        Destroy(transform.GetComponent<MeshRenderer>());
+        Destroy(transform.GetComponent<Mesh>());
     }
 
     // Use this for initialization
