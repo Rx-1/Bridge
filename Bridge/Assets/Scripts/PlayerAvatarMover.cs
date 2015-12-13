@@ -69,6 +69,7 @@ public class PlayerAvatarMover : MonoBehaviour {
         AC = gameObject.GetComponent<Animator>();
         if (!AC)
             Debug.LogError("No animator found.");
+        topSpeed *= transform.parent.lossyScale.x;
 	}
 	
 	// Update is called once per frame
