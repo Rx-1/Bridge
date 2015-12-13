@@ -13,6 +13,7 @@ public class PlayerAvatarMover : MonoBehaviour {
 
     public float acceleration = 20;
     public float topSpeed = 10;
+    public float snapSpeed = 2.5f;
 
     Animator AC;
 
@@ -81,8 +82,9 @@ public class PlayerAvatarMover : MonoBehaviour {
         } else if (button) {
             float directionXx = button.transform.localPosition.x - transform.localPosition.x;
             if (directionXx != 0) {
-                speed += (directionXx / Mathf.Abs(directionXx)) * acceleration * Time.deltaTime;
-                speed = Mathf.Clamp(speed, -topSpeed, topSpeed);
+                //speed += (directionXx / Mathf.Abs(directionXx)) * acceleration * Time.deltaTime;
+                //speed = Mathf.Clamp(speed, -topSpeed, topSpeed);
+                speed = (directionXx / Mathf.Abs(directionXx)) * snapSpeed;
                 if (directionXx > 0 != button.transform.localPosition.x - (transform.localPosition + Vector3.right * speed * Time.deltaTime).x > 0) {
                     transform.localPosition += Vector3.right * directionXx;
                     speed = 0;
@@ -91,14 +93,19 @@ public class PlayerAvatarMover : MonoBehaviour {
                 speed = 0;
             }
         } else if (speed != 0) {
-            if (Mathf.Abs(speed) < Mathf.Abs(acceleration * Time.deltaTime)) {
-                speed = 0;
-            } else {
-                speed -= (speed / Mathf.Abs(speed)) * acceleration * Time.deltaTime;
-                speed = Mathf.Clamp(speed, -topSpeed, topSpeed);
-            }
+            speed = 0;
+            //if (Mathf.Abs(speed) < Mathf.Abs(acceleration * Time.deltaTime)) {
+            //    speed = 0;
+            //} else {
+            //    speed -= (speed / Mathf.Abs(speed)) * acceleration * Time.deltaTime;
+            //    speed = Mathf.Clamp(speed, -topSpeed, topSpeed);
+            //}
         }
+
+
         transform.localPosition += Vector3.right * speed * Time.deltaTime;
+
+        //Constraints
         if(transform.localPosition.x < leftR) {
             transform.localPosition += Vector3.right * (leftR - transform.localPosition.x);
             speed = 0;
@@ -106,6 +113,8 @@ public class PlayerAvatarMover : MonoBehaviour {
             transform.localPosition += Vector3.right * (rightR - transform.localPosition.x);
             speed = 0;
         }
+
+        //Animation
         if (speed < 0) {
             AC.Play("WalkLeft");
         } else if (speed > 0) {
