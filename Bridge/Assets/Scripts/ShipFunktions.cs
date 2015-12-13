@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum InputXx { Null, TurnLeft, TurnRight, SpeedUp, SpeedDown, Fire };
+public enum InputXx {Null, TurnLeft, TurnRight, SpeedUp, SpeedDown, Fire };
 
 public class ShipFunktions : MonoBehaviour {
 
@@ -18,6 +18,8 @@ public class ShipFunktions : MonoBehaviour {
 
     Rigidbody RB;
 
+    Cannon cannon;
+
     void Awake() {
         if (player)
             Debug.LogError("Only one ship allowed");
@@ -29,6 +31,7 @@ public class ShipFunktions : MonoBehaviour {
         RB = gameObject.GetComponent<Rigidbody>();
         speed = maxForvardSpeed * Mathf.Clamp(initialSpeedPersentageFromMaxForvardSpeed / 100, 0, 1);
         RB.velocity = transform.forward * speed;
+        cannon = Cannon.cannon;
 	}
 	
 	// Update is called once per frame
@@ -39,6 +42,9 @@ public class ShipFunktions : MonoBehaviour {
         } else if(myInput == InputXx.TurnRight) {
             RB.rotation = Quaternion.Euler(RB.rotation.eulerAngles + transform.up * anglesPerSecond * Time.deltaTime);
             RB.velocity = transform.forward * speed;
+        } else if(myInput == InputXx.Fire) {
+            cannon.Fire();
         }
+        cannon.CannonUpdate();
 	}
 }
