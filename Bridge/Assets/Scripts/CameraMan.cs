@@ -3,12 +3,21 @@ using System.Collections;
 
 public class CameraMan : MonoBehaviour {
 
+    public Transform overrideTarget;
+
     Transform target;
     Vector3 diff;
 
 	// Use this for initialization
 	void Start () {
-        target = ShipFunktions.player.transform;
+        if (overrideTarget) {
+            target = overrideTarget;
+        } else if (ShipFunktions.player) {
+            target = ShipFunktions.player.transform;
+        } else {
+            Debug.LogError("No player ship found on sceen.");
+            return;
+        }
         diff = transform.position - target.position;
 	}
 

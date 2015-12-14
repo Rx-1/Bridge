@@ -4,9 +4,9 @@ using System.Collections;
 public class CannonBall : MonoBehaviour {
 
     public float lifespawn = 10;
-    [HideInInspector]
+    //[HideInInspector]
     public Vector3 projectileVelocity;
-    [HideInInspector]
+    //[HideInInspector]
     public Vector3 projectileGravity;
 
     Vector3 gravityXx;

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum InputXx {Null, TurnLeft, TurnRight, SpeedUp, SpeedDown, Fire };
+public enum InputXx {Null, TurnLeft, TurnRight, SpeedUp, SpeedDown, Fire, Charge};
 
 public class ShipFunktions : MonoBehaviour {
 
@@ -50,6 +50,8 @@ public class ShipFunktions : MonoBehaviour {
             RB.velocity = transform.forward * speed;
         } else if(myInput == InputXx.Fire) {
             cannon.Fire();
+        } else if (myInput == InputXx.Charge) {
+            cannon.Charge();
         }
         cannon.CannonUpdate();
 	}

@@ -13,7 +13,7 @@ public class Cannon : MonoBehaviour {
     public float shotsPerMin = 60;
     public bool mustBeChargedToFire = false;
     public float chargeDistanceAdd = 30;
-    public float chargeHeightAdd = 30;
+    public float chargeHeightAdd = 15;
     public int maxCharges = 3;
     public float chargingTime = 2;
 
@@ -61,6 +61,7 @@ public class Cannon : MonoBehaviour {
             while (chargeTimer >= chargingTime && charges < maxCharges) {
                 charges++;
                 chargeTimer -= chargingTime;
+                Debug.Log(charges);
             }
         } else {
             chargeTimer = 0;
@@ -79,8 +80,10 @@ public class Cannon : MonoBehaviour {
                 if (addParentVelocity)
                     projectileVelocity += parentRB.velocity;
                 projectile.GetComponent<CannonBall>().projectileVelocity = projectileVelocity;
-                projectile.GetComponent<CannonBall>().projectileVelocity = gra * Vector3.down;
+                projectile.GetComponent<CannonBall>().projectileGravity = gra * Vector3.down;
                 shotTimer = shotsPerMin / 60;
+                charges = 0;
+                Debug.Log(charges);
             }
         }
 
