@@ -48,6 +48,10 @@ public class Cannon : MonoBehaviour {
         chargeTrigger = true;
     }
 
+    public int ChargeLevel() {
+        return charges;
+    }
+
     public void CannonUpdate() {
         //Shot Timer
         if (shotTimer > 0)
@@ -61,7 +65,6 @@ public class Cannon : MonoBehaviour {
             while (chargeTimer >= chargingTime && charges < maxCharges) {
                 charges++;
                 chargeTimer -= chargingTime;
-                Debug.Log(charges);
             }
         } else {
             chargeTimer = 0;
@@ -83,7 +86,6 @@ public class Cannon : MonoBehaviour {
                 projectile.GetComponent<CannonBall>().projectileGravity = gra * Vector3.down;
                 shotTimer = shotsPerMin / 60;
                 charges = 0;
-                Debug.Log(charges);
             }
         }
 
