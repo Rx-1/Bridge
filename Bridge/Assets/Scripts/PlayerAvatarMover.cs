@@ -22,6 +22,8 @@ public class PlayerAvatarMover : MonoBehaviour {
 
     float speed = 0;
 
+    float myScale;
+
     GameObject button;
 
     public bool IsStill() {
@@ -71,6 +73,7 @@ public class PlayerAvatarMover : MonoBehaviour {
         if (!AC)
             Debug.LogError("No animator found.");
         topSpeed *= transform.parent.lossyScale.x;
+        myScale = transform.localScale.x;
 	}
 	
 	// Update is called once per frame
@@ -116,9 +119,11 @@ public class PlayerAvatarMover : MonoBehaviour {
 
         //Animation
         if (speed < 0) {
-            AC.Play("WalkLeft");
+            AC.Play("WalkRight");
+            transform.localScale -= Vector3.right * (transform.localScale.x + myScale);
         } else if (speed > 0) {
             AC.Play("WalkRight");
+            transform.localScale += Vector3.right * (myScale - transform.localScale.x);
         } else if (button) {
             AC.Play("Interact");
         } else {
