@@ -67,7 +67,7 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    animationCompression: 1
+    animationCompression: 0
     animationRotationError: .5
     animationPositionError: .5
     animationScaleError: .5
@@ -145,8 +145,8 @@ ModelImporter:
     - serializedVersion: 16
       name: Armature|MouthAgape
       takeName: Armature|MouthAgape
-      firstFrame: 0
-      lastFrame: 40
+      firstFrame: 13
+      lastFrame: 99
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
