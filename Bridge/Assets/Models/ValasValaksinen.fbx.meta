@@ -26,6 +26,8 @@ ModelImporter:
     100036: Bone.flipperLower.r_end
     100038: Sphere
     100040: //RootNode
+    100042: Camera
+    100044: Lamp
     400000: Armature
     400002: Bone
     400004: Bone.001
@@ -47,6 +49,8 @@ ModelImporter:
     400036: Bone.flipperLower.r_end
     400038: Sphere
     400040: //RootNode
+    400042: Camera
+    400044: Lamp
     4300000: Sphere
     7400000: Armature|CloseMouth
     7400002: Armature|MouthAgape
