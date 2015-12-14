@@ -32,6 +32,7 @@ public class ShipFunktions : MonoBehaviour {
         Destroy(RB);
         transform.rotation = Quaternion.Euler(-30, transform.eulerAngles.y, 25);
         this.enabled = false;
+        GameManager.Crashed();
     }
 
     void Awake() {

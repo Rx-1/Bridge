@@ -52,6 +52,15 @@ public class Cannon : MonoBehaviour {
         return charges;
     }
 
+    public float ChargeProgress()
+    {
+        if (charges >= maxCharges)
+            return 0;
+        if (chargeTimer > chargingTime)
+            return 1;
+        return chargeTimer / chargingTime;
+    }
+
     public void CannonUpdate() {
         //Shot Timer
         if (shotTimer > 0)

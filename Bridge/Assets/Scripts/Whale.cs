@@ -22,7 +22,6 @@ public class Whale : MonoBehaviour {
     Transform player;
 
     Animator AC;
-    Collider myCollider;
 
     void OnTriggerEnter(Collider c) {
         if ((!c.isTrigger || readytofeed) && (myState == WhaleState.Surfacing || myState == WhaleState.Surfaced)) {
@@ -30,6 +29,7 @@ public class Whale : MonoBehaviour {
                 GameObject particleXx = GameObject.Instantiate(particlePrefab);
                 particleXx.transform.position = transform.position;
                 Destroy(particleXx, destructionDelay);
+                GameManager.SavedWhales();
             }
             Destroy(gameObject, destructionDelay);
             WhaleCount--;
@@ -40,8 +40,7 @@ public class Whale : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        AC = gameObject.GetComponentInChildren<Animator>(); 
-        myCollider = gameObject.GetComponent<Collider>();
+        AC = gameObject.GetComponentInChildren<Animator>();
         player = ShipFunktions.player.transform;
         WhaleCount++;
         transform.position += Vector3.down * intialDepth;
